@@ -13,9 +13,10 @@ booksController.getCatalogue = (req, res, next) => {
 
 // router for detailed book info
 booksController.getDetails = (req, res, next) => {
-  const { id } = req.params;
+  const { bookid } = req.params;
   // Logic here
-  
+
   res.locals.bookDetails = {};
+  return next();
 }
 export default booksController;
