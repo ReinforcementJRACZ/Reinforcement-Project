@@ -1,22 +1,18 @@
-import db from '../models/models.js';
+import { populateBooksService } from '../services/populateBooksService.js';
 
 const booksController = {};
 
-// controller to query for all books
-booksController.getCatalogue = (req, res, next) => {
-  // Logic here
-
-  // variable to store query result
-  res.locals.catalogue = [];
-  return next();
-};
-
-// router for detailed book info
-booksController.getDetails = (req, res, next) => {
-  const { bookid } = req.params;
-  // Logic here
-
-  res.locals.bookDetails = {};
-  return next();
+// middleware for populating the database 
+booksController.populateBooksTable = async (req, res, next) => {
+  try {
+    await populateBooksService();
+    return next();
+  } catch (error) {
+    return next ({
+      log: 'booksController: Error while populating books table:' + error,
+      status: 500,
+      message: { err: 'Failed to populate books in the database' },
+    })
+  }
 }
 export default booksController;

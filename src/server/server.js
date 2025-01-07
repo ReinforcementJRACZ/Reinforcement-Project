@@ -1,6 +1,7 @@
 import express from 'express';
-import { getUser, getBooks } from './services/HardcoverBooksService.js';
-import { getAllBooks } from './services/GoogleBooksService.js';
+import { getUser, getBooks } from './services/hardcoverBooksService.js';
+import { getAllGoogleBooks } from './services/googleBooksService.js';
+import { router } from './routers/router.js'
 import path from 'path';
 import { connect } from './models/models.js';
 
@@ -11,6 +12,9 @@ const PORT = 3333;
 connect(); 
 
 app.use (express.json());
+
+app.use('/api', router);
+
 
 // Books route
 app.get('/books', async (req, res) => {
@@ -26,7 +30,7 @@ app.get('/books', async (req, res) => {
 // Google Books route
 app.get('/GoogleBooks', async (req, res) => {
   try {
-    const books = await getAllBooks();
+    const books = await getAllGoogleBooks();
     res.json(books); 
 
   } catch (error) {
