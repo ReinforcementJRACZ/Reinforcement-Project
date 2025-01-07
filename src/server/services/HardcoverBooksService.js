@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log('Token:', process.env.TOKEN);
+console.log('Token:', process.env);
 const API_URL = 'https://api.hardcover.app/v1/graphql';
 const query = `
     query Test {
