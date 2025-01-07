@@ -1,0 +1,1 @@
+// Footer component (links like About, Privacy, etc.)
