@@ -1,9 +1,13 @@
 import express from 'express';
 import { getUser } from './services/HardcoverBooksService.js';
 import path from 'path';
+import { connect } from './models/models.js';
 
 const app = express();
 const PORT = 3333;
+
+// Connect to db
+connect(); 
 
 app.use (express.json());
 

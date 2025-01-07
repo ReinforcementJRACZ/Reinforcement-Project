@@ -1,0 +1,1 @@
+// Define reusable constants (e.g., API endpoints, genres)
