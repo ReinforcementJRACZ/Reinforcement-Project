@@ -16,7 +16,7 @@ const pool = new Pool({
 async function connect() {
   try {
     const res = await pool.query('SELECT NOW()'); 
-    console.log('Connected to database:', res.rows[0].now);
+    console.log('Connected to database');
   } catch (err) {
     console.error('Error connecting to the database:', err);
     process.exit(1); 
