@@ -1,5 +1,6 @@
 import express from 'express';
-import { getUser } from './services/HardcoverBooksService.js';
+import { getUser, getBooks } from './services/HardcoverBooksService.js';
+import { getAllBooks } from './services/GoogleBooksService.js';
 import path from 'path';
 import { connect } from './models/models.js';
 
@@ -10,6 +11,28 @@ const PORT = 3333;
 connect(); 
 
 app.use (express.json());
+
+// Books route
+app.get('/books', async (req, res) => {
+  try {
+    const books = await getBooks();
+    res.json(books); 
+
+  } catch (error) {
+    res.status(500).json({error: error.message});
+  }
+});
+
+// Google Books route
+app.get('/GoogleBooks', async (req, res) => {
+  try {
+    const books = await getAllBooks();
+    res.json(books); 
+
+  } catch (error) {
+    res.status(500).json({error: error.message});
+  }
+});
 
 // User route
 app.get('/me', async (req, res) => {
