@@ -1,12 +1,12 @@
 import express from 'express';
-import booksController from '..controllers/booksController.js'
-import userController from '..controllers/userController.js'
+import booksController from '../controllers/booksController.js';
+import userController from '../controllers/userController.js';
 
 const router = express.Router();
 
 // Route to populate catalogue
 router.get('/catalogue', booksController.getCatalogue, (req, res) => {
-  res.status(200).json(res.locals.catalogue || [])
+  res.status(200).json(res.locals.catalogue || []);
 });
 
 // Route for book details
@@ -26,5 +26,7 @@ router.get('/to-read/:userid', userController.toRead, (req, res) => {
 
 // Routes to mark books as read or want to read
 router.post('/add', booksController.add, (req, res) => {
-  res.status(200)
-})
+  res.status(200);
+});
+
+export default router;

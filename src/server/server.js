@@ -3,6 +3,7 @@ import { getUser, getBooks } from './services/HardcoverBooksService.js';
 import { getAllBooks } from './services/GoogleBooksService.js';
 import path from 'path';
 import { connect } from './models/models.js';
+import router from './routers/router.js'
 
 const app = express();
 const PORT = 3333;
@@ -11,6 +12,10 @@ const PORT = 3333;
 connect(); 
 
 app.use (express.json());
+
+
+//Router
+app.use('/', router)
 
 // Books route
 app.get('/books', async (req, res) => {
@@ -47,7 +52,7 @@ app.get('/me', async (req, res) => {
 
 // 404 router
 app.use('/', (req, res) => {
-  return res.status(404).send('Page not found')
+  return res.status(404).send('Page not found for Reinforceme')
 })
 
 // global error handler

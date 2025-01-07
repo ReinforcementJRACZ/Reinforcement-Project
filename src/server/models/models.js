@@ -8,14 +8,14 @@ dotenv.config();
 const PG_URI = process.env.PG_URI;
 
 // Set up connection
-const pool = new Pool({
+const db = new Pool({
   connectionString: PG_URI,
 })
 
 // Test function to connect to DB
 async function connect() {
   try {
-    const res = await pool.query('SELECT NOW()'); 
+    const res = await db.query('SELECT NOW()'); 
     console.log('Connected to database');
   } catch (err) {
     console.error('Error connecting to the database:', err);
@@ -27,8 +27,9 @@ async function connect() {
 export const query = {
   query: (text, params, callback) => {
     console.log('executed query', text);
-    return pool.query(text, params, callback);
+    return db.query(text, params, callback);
   },
 };
 
-export { connect }
+export { db, connect };
+
