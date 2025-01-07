@@ -1,4 +1,5 @@
 import express from 'express';
+const { getUser } from '/services/HardcoverBookService.js';
 import path from 'path';
 
 const app = express();
@@ -6,9 +7,16 @@ const PORT = 3333;
 
 app.use (express.json());
 
+// User route
+app.get('/me', async (req, res) => {
+  try {
+    const user = await getUser();
+    res.json(user); 
 
-
-
+  } catch (error) {
+    res.status(500).json({error: error.message});
+  }
+});
 
 // 404 router
 app.use('/', (req, res) => {
