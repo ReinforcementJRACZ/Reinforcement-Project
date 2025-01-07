@@ -1,12 +1,8 @@
 import express from 'express';
 import path from 'path';
-import { connect } from './models/models.js';
 
 const app = express();
 const PORT = 3333;
-
-// Connect to db
-connect(); 
 
 app.use (express.json());
 
@@ -23,7 +19,7 @@ app.use('/', (req, res) => {
 app.use((err, req, res, next) => {
   const defaultErr = {
     message: 'Unknown error occured',
-    statu: 500,
+    status: 500,
     log: { error: 'Unknown error occured' }
   };
   const caughtError = Object.assign(defaultErr, err)
