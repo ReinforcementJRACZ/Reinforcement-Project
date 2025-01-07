@@ -1,5 +1,5 @@
 import express from 'express';
-const { getUser } from '/services/HardcoverBookService.js';
+import { getUser } from './services/HardcoverBooksService.js';
 import path from 'path';
 
 const app = express();
