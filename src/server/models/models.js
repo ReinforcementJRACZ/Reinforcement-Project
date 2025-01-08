@@ -1,4 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
 import pkg from 'pg';
 const { Pool } = pkg;
 import dotenv from 'dotenv';
@@ -31,4 +30,5 @@ export const query = {
   },
 };
 
-export { db, connect }
+export { db, connect };
+
