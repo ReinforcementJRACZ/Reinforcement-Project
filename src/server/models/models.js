@@ -9,6 +9,7 @@ const PG_URI = process.env.PG_URI;
 
 // Set up connection
 const db = new Pool({
+const db = new Pool({
   connectionString: PG_URI,
 })
 
