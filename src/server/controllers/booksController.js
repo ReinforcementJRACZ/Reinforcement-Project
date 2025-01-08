@@ -37,7 +37,7 @@ booksController.populateBooksTable = async (req, res, next) => {
   }
 };
 
-// Middleware to populate book details when user clicks into one
+// Middleware to populate book details when user clicks into one (DONE)
 booksController.getDetails = (req, res, next) => {
   console.log("in booksController.get details")
   const { bookid } = req.params;
@@ -59,13 +59,20 @@ booksController.getDetails = (req, res, next) => {
 
 // Middleware to add books to TBR or read (DONE)
 booksController.add = (req, res, next) => {
-  const { userId, bookId, list } = req.body;
-  const insertQuery = `
-    INSERT INTO ${list} (user_id, book_id)
-    VALUES ($1, $2)
-    RETURNING *;
-  `;
-  db.query(insertQuery, [userId, bookId], (err, result) => {
+  console.log("adding book")
+  const { userId, bookId, list, rating } = req.body;
+
+  const insertQuery =
+    list === 'books_read'
+      ? `INSERT INTO ${list} (user_id, book_id, rating)
+         VALUES ($1, $2, $3)
+         RETURNING *;`
+      : `INSERT INTO ${list} (user_id, book_id)
+         VALUES ($1, $2)
+         RETURNING *;`;
+  const queryParams =
+    list === 'books_read' ? [userId, bookId, rating || null] : [userId, bookId];
+  db.query(insertQuery, queryParams, (err, result) => {
     if (err) {
       console.error('Error executing query', err);
       return next(err);
