@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,12 +12,15 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
 
 const settings = ['Profile', 'Logout'];
+const pages = ['Browse', 'My Books'];
 
 function MenuAppBar() {
 	const [anchorElUser, setAnchorElUser] = useState(null);
   const [openSidebar, setOpenSidebar] = useState(false);
+	const navigate = useNavigate();
 
   const toggleSidebar = (newOpen) => () => {
     setOpenSidebar(newOpen);
@@ -29,6 +33,10 @@ function MenuAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   }
+
+	const handleNavigation = (route) => {
+    navigate(route);
+  };
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
@@ -66,7 +74,29 @@ function MenuAppBar() {
               Bettereads
             </Typography>
 
-            <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+						<Button
+                color="inherit"
+                onClick={() => handleNavigation('/')}
+                sx={{ textTransform: 'none' }}
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => handleNavigation('/catalogue')}
+                sx={{ textTransform: 'none' }}
+              >
+                Catalogue
+              </Button>
+							<Button
+                color="inherit"
+                onClick={() => handleNavigation('/my-books')}
+                sx={{ textTransform: 'none' }}
+              >
+                My Books
+              </Button>
+
+            <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>				
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt='Remy Sharp' src='/pro1.jpg' />
