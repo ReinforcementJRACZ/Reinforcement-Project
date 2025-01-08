@@ -82,4 +82,18 @@ booksController.add = (req, res, next) => {
   return next();
 };
 
+booksController.deleteAllBooks = async (req, res, next) => {
+  try {
+    const deleteBooksQuery = `DELETE FROM books`
+    await db.query(deleteBooksQuery)
+    return next();
+  } catch (error) {
+    return next ({
+      log: 'booksController: Error while deleting all books:' + error,
+      status: 500,
+      message: { err: 'Failed to delete books from database' },
+    })
+  }
+}
+
 export default booksController;

@@ -34,4 +34,9 @@ router.post('/add', booksController.add, (req, res) => {
   return res.status(200)
 })
 
+router.delete('/books', booksController.deleteAllBooks, (req, res) => {
+  res.status(200).json({message: 'All books deleted successfully'});
+});
+
+
 export default router;
