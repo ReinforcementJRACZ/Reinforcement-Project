@@ -12,6 +12,7 @@ import InputBase from '@mui/material/InputBase';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -51,8 +52,11 @@ function Catalog() {
 	const [title, setTitle] = React.useState('');
 	const [genre, setGenre] = React.useState('');
 	const [rating, setRating] = React.useState('');
-	const [books, setBooks] = useState([]);
 	const [filteredBooks, setFilteredBooks] = useState([]);
+
+	const [books, setBooks] = useState([]);
+	const [page, setPage] = useState(1);
+  const booksPerPage = 40;
 
 	useEffect(() => {
 		//define aysnc function  
@@ -60,55 +64,34 @@ function Catalog() {
 					try {
 						console.log("entered useEffect fn")
 							const response = await fetch(`/api/books`)
-
-							console.log("response: ", response)
-
+							// console.log("response: ", response)
 							if (!response.ok) {
 									throw new Error (`Reponse not ok, status ${response.status}`)
 							}
 							const result = await response.json();
-							//result will be an object with key recipes that an array 
-							const fetchedBooks = result;  // result.recipes = an array of the different drinks
-
+							const fetchedBooks = result;  
 							console.log("fetchedBooks: ", fetchedBooks)
-							//update state
 							setBooks(fetchedBooks);
-					//need catch error tched drinks: ", fetchedDrinks)
 					}
-					//need catch error 
 					catch (error){
 							console.log("Error caught in the Catalog: " + error)
 					}
 			}
 			
-			//call fetchdata function 
 			fetchData();
 	}, [])
 
-	
-	// const allBooks = await fetch('http://localhost:3333/api/books', {
-	// 	// rename here after
-	// 	method: 'GET',
-	// 	headers: {
-	// 		'Content-Type': 'application/json',
-	// 	},
-	// 	body: JSON.stringify({
-	// 		user_arguments: userArguments,
-	// 		ai_arguments: aiArguments,
-	// 		topic: topic,
-	// 		user_side: userSide,
-	// 		round: round,
-	// 	}),
-	// });
+	// function cardDisplay() {
+
+	// }
+
+	const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+
+  const currentBooks = books.slice((page - 1) * booksPerPage, page * booksPerPage);
 
 
-	// // Example book data
-  // const books = [
-  //   { id: 1, title: 'Book A', author: 'Author 1', genre: 'Fiction', rating: 4.8 },
-  //   { id: 2, title: 'Book B', author: 'Author 2', genre: 'Non-Fiction', rating: 4.3 },
-  //   { id: 3, title: 'Book C', author: 'Author 1', genre: 'Fiction', rating: 3.5 },
-  //   { id: 4, title: 'Book D', author: 'Author 3', genre: 'Sci-Fi', rating: 4.0 },
-  // ];
 
 	// const handleSearch = () => {
   //   const results = books.filter((book) => {
@@ -189,7 +172,36 @@ function Catalog() {
 				<Button variant="solid" color="primary" onClick={handleSearch}>Search</Button>
       </FormControl> */}
 
-
+			{/* Display Books */}
+			<Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: 2,
+          padding: 2,
+        }}
+      >
+        {currentBooks.map((book) => (
+          <Card key={book.id} sx={{ width: '300px', height: '250px' }}>
+            <CardContent>
+              <Typography variant="h6">{book.title}</Typography>
+              <Typography variant="body2">Author: {book.author}</Typography>
+              <Typography variant="body2">Genre: {book.genre}</Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+		
+			{/* Pagination */}
+			<Box display="flex" justifyContent="center" sx={{ marginTop: 3 }}>
+        <Pagination
+          count={Math.ceil(books.length / booksPerPage)}
+          page={page}
+          onChange={handlePageChange}
+          color="primary"
+        />
+      </Box>
 		</div>
 	)
 }
