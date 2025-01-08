@@ -33,58 +33,71 @@ function ReadBooks() {
 
   console.log('booksReads state', booksRead)
 
+ 
   return (
-    <Box sx={{ padding: 3 }}>
-  <Typography
+		<div>
+			 <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="left"
+        gap={2}
+        sx={{
+          marginTop: 10,
+          marginBottom: 4,
+          
+        }}
+      >
+
+			</Box>
+
+			{/* Display Books */}
+      <Typography
   variant="h4"
   component="h1"
   gutterBottom
-  align="center"
+  align="left"
   sx={{
     fontWeight: "bold", // Makes the text bold
     color: "primary.main", // Uses theme's primary color
-    textDecoration: "underline", // Adds an underline
     textTransform: "uppercase", // Makes the text uppercase
     letterSpacing: 2, // Adds spacing between letters
     mb: 4, // Adds bottom margin for spacing
     textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)", // Adds a subtle shadow
+    marginLeft: 15, 
   }}
 >
       Books Read
     </Typography>
-    <Grid container spacing={3}>
-      {booksRead.map((book, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index}>
-          <Card sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
-            {book.image !== "No Image" && (
-              <CardMedia
-                component="img"
-                sx={{
-                  height: 250,
-                  objectFit: "cover",
-                }}
-                image={book.image}
-                alt={book.book_title}
-              />
-            )}
-            <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="h6" component="div">
-                {book.book_title}
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                Author: {book.book_author}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Genre: {book.book_genre}
-              </Typography>
+			<Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: 2,
+          padding: 2,
+          marginLeft: 15, 
+        }}
+      >
+        
+        {booksRead.map((book) => (
+          <Card key={1} sx={{ width: '300px', height: '450px', cursor: 'pointer' }}>
+						<CardMedia
+              component="img"
+              height="240"
+              image={book.image}
+              alt={`${book.book_title} cover`}
+            />
+            <CardContent>
+              <Typography variant="h6">{book.book_title}</Typography>
+              <Typography variant="body2">Author: {book.boo_author}</Typography>
+              <Typography variant="body2">Genre: {book.book_genre}</Typography>
               <Rating value={book.rating} readOnly />
             </CardContent>
           </Card>
-        </Grid>
-      ))}
-    </Grid>
-  </Box>
-  );
+        ))}
+      </Box>
+		</div>
+	)
 }
 
 export default ReadBooks;

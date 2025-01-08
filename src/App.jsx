@@ -15,9 +15,10 @@ function App() {
 		<Router>
       <MenuAppBar />
       <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} />
-        <Route path="/catalogue" element={<Catalog />} />
+        <Route path="/" element={<MyBooks />}/>
         <Route path="/my-books" element={<MyBooks />} />
+        <Route path="/catalogue" element={<Catalog />} />
+        {/* <Route path="/my-books" element={<MyBooks />} /> */}
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Router>
