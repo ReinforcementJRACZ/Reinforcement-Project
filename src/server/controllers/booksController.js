@@ -3,6 +3,7 @@ import { populateBooksService } from '../services/populateBooksService.js';
 
 const booksController = {};
 
+// Middleware to seed our database (DONE)
 booksController.getBooks = async (req, res, next) => {
   try {
     const getBooksQuery = `
@@ -22,7 +23,7 @@ booksController.getBooks = async (req, res, next) => {
   }
 };
 
-// middleware for populating the database
+// Middleware for populating our database (DONE)
 booksController.populateBooksTable = async (req, res, next) => {
   try {
     await populateBooksService();
@@ -36,21 +37,34 @@ booksController.populateBooksTable = async (req, res, next) => {
   }
 };
 
+// Middleware to populate book details when user clicks into one
 booksController.getDetails = (req, res, next) => {
+  console.log("in booksController.get details")
+  const { bookid } = req.params;
+  const bookQuery = `
+    SELECT *
+    FROM books
+    WHERE id = $1
+  `
+  db.query(bookQuery, [bookid], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      return next(err);
+    }
+    res.locals.bookDetails = result.rows[0];
+    console.log(res.locals.bookDetails)
+  });
   return next();
 };
 
-// middleware to add books to TBR or read
+// Middleware to add books to TBR or read (DONE)
 booksController.add = (req, res, next) => {
   const { userId, bookId, list } = req.body;
-
-  // Insert into user's to read list
   const insertQuery = `
     INSERT INTO ${list} (user_id, book_id)
     VALUES ($1, $2)
     RETURNING *;
   `;
-
   db.query(insertQuery, [userId, bookId], (err, result) => {
     if (err) {
       console.error('Error executing query', err);
