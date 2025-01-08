@@ -1,4 +1,4 @@
-import { { db } } from '../models/models.js';
+import { db } from '../models/models.js';
 import { populateBooksService } from '../services/populateBooksService.js';
 
 const booksController = {};

@@ -1,4 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
 import pkg from 'pg';
 const { Pool } = pkg;
 import dotenv from 'dotenv';
@@ -8,7 +7,6 @@ dotenv.config();
 const PG_URI = process.env.PG_URI;
 
 // Set up connection
-const db = new Pool({
 const db = new Pool({
   connectionString: PG_URI,
 })
