@@ -2,11 +2,10 @@ import { db } from '../models/models.js';
 
 const userController = {};
 
-// Books that user has read
+// Middleware to populate books that user has read (DONE)
 userController.read = (req, res, next) => {
   console.log('in userController.read');
   const { userid } = req.params;
-  // logic here
   console.log(userid);
   const queryText = `
   SELECT 
@@ -18,8 +17,8 @@ userController.read = (req, res, next) => {
 `;
   db.query(queryText, [userid], (err, result) => {
     if (err) {
-      console.error('Error executing query', err); // Use console.error for errors
-      return next(err); // Pass error to next middleware
+      console.error('Error executing query', err);
+      return next(err);
     }
     console.log(result.rows);
     // variable to store query result
@@ -29,12 +28,9 @@ userController.read = (req, res, next) => {
   });
 };
 
-// Books on user's TBR list
+// Middleware to populate books on user's TBR list (DONE)
 userController.toRead = (req, res, next) => {
   const { userid } = req.params;
-
-  // logic here
-
   const queryText = `
   SELECT 
     b.title AS book_title
@@ -44,11 +40,10 @@ userController.toRead = (req, res, next) => {
 `;
   db.query(queryText, [userid], (err, result) => {
     if (err) {
-      console.error('Error executing query', err); // Use console.error for errors
-      return next(err); // Pass error to next middleware
+      console.error('Error executing query', err);
+      return next(err);
     }
     console.log(result.rows);
-    // variable to store query result
     res.locals.toRead = result.rows;
     console.log(res.locals.toRead);
     return next();
