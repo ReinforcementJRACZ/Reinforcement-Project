@@ -1,0 +1,45 @@
+/* style the forms in pages */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f5f2; /* Tan background */
+  }
+  
+  .auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .auth-logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .auth-title {
+    font-size: 32px;
+    color: #6a1b9a; /* Purple accent */
+    margin: 10px 0;
+  }
+  
+  .auth-subtitle {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .auth-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-link {
+    color: #6a1b9a;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+  }
+  

@@ -4,6 +4,9 @@ import { getAllGoogleBooks } from './services/googleBooksService.js';
 import { connect } from './models/models.js';
 import router from './routers/router.js'
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = 3333;

@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import LoginForm from "../components/LoginForm";
+import SignupForm from "../components/SignupForm";
 import Logo from "../components/Logo";
 
-function LoginPage() {
+function SignupPage() {
   return (
     <Box
       sx={{
@@ -19,14 +19,14 @@ function LoginPage() {
     >
       <Logo />
       <Typography variant="h3" sx={{ color: "#6a1b9a", mb: 2 }}>
-        BetterReads
+        Sign Up to BetterReads
       </Typography>
-      <Typography variant="subtitle1" sx={{ mb: 4, fontStyle: "italic" }}>
-        “A room without books is like a body without a soul.”
+      <Typography variant="subtitle1" sx={{ mb: 4 }}>
+        “The journey of a thousand miles begins with a single page.”
       </Typography>
-      <LoginForm />
+      <SignupForm />
     </Box>
   );
 }
 
-export default LoginPage;
+export default SignupPage;

@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
-import MenuAppBar from './assets/components/AppBar';
-import Catalog from './assets/components/Catalog';
-import MyBooks from './assets/components/MyBooks';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./assets/pages/LoginPage";
+import SignupPage from "./assets/pages/SignupPage";
+import Catalog from "./assets/components/Catalog";
+import MyBooks from "./assets/components/MyBooks";
 
-function App() {
-  // const [count, setCount] = useState(0)
+// Used to track auth state
+// function App() {
+//   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  return (
-    // <>
-		// 	<MenuAppBar />
-		// 	<Catalog />
-    // </>
-		<Router>
-      <MenuAppBar />
-      <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} />
-        <Route path="/catalogue" element={<Catalog />} />
-        <Route path="/my-books" element={<MyBooks />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
-      </Routes>
-    </Router>
-  )
-}
+//// Static value for now for debugging purposes
+// function App() {
+//   const isAuthenticated = false; 
 
-export default App;
+  const App = () => {
+    return (
+      <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+        <Router>
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/mybooks" element={<MyBooks />} />
+          </Routes>
+        </Router>
+      </GoogleOAuthProvider>
+    );
+  };
+  
+  export default App;
