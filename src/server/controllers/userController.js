@@ -35,9 +35,24 @@ userController.toRead = (req, res, next) => {
 
   // logic here
 
-  // variable to store query result
-  res.locals.toRead = [];
-return next();
+  const queryText = `
+  SELECT 
+    b.title AS book_title
+  FROM want_to_read br
+  JOIN books b ON br.book_id = b.id
+  WHERE br.user_id =$1;  
+`;
+  db.query(queryText, [userid], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err); // Use console.error for errors
+      return next(err); // Pass error to next middleware
+    }
+    console.log(result.rows);
+    // variable to store query result
+    res.locals.toRead = result.rows;
+    console.log(res.locals.toRead);
+    return next();
+  });
 };
 
 export default userController;
