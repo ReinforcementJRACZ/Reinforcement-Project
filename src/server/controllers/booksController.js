@@ -43,8 +43,8 @@ booksController.getDetails = (req, res, next) => {
 // middleware to add books to TBR or read
 booksController.add = (req, res, next) => {
   const { userId, bookId, list } = req.body;
-  // userId is user ID, bookId is book that user wants to add, and list is either want to read or already read (‘want_to_read’ OR ‘books_read’)
 
+  // Insert into user's to read list
   const insertQuery = `
     INSERT INTO ${list} (user_id, book_id)
     VALUES ($1, $2)
@@ -57,10 +57,7 @@ booksController.add = (req, res, next) => {
       return next(err);
     }
     console.log(`Added to list ${list}: `, result.rows[0]);
-
-    return next();
   });
-
   return next();
 };
 
