@@ -5,7 +5,7 @@ dotenv.config();
 const API_URL='https://www.googleapis.com/books/v1/volumes';
 const API_KEY=process.env.GOOGLE_BOOKS_API_KEY;
 
-export const getAllBooks = async () => {
+export const getAllGoogleBooks = async () => {
     try {
         const queryParams = {
             q: 'nonfiction', 
