@@ -1,49 +1,50 @@
-//Component for "Want to Read" tab
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardMedia, Typography, Grid, Rating, Box } from "@mui/material";
-function WantToRead() {
+function ReadBooks() {
 
-  
-  const [toRead, updateToRead] = useState([]);
+  const [booksRead, updateBooksRead] = useState([]);
+ 
 
   const [user_id, updateUser_id] = useState(1); 
 
   //get request to the server to retrieve books read and want to read
 
   useEffect(() => {
-    const fetchedBooksToRead = async () => {
+    const fetchedBooksRead = async () => {
       try {
-        console.log('in useEffect, inside booksToRead fn');
-        const response = await fetch ('http://localhost:3333/to-read/1')
+        console.log('in useEffect');
+        const response = await fetch ('http://localhost:3333/read/1')
         
         if (!response.ok) {
           throw new Error ('Issue with response')
         }
         const result = await response.json();
         console.log('result', result)
-        updateToRead(result)
+        updateBooksRead(result)
       }
       catch (error) {
         console.log('Error fetching data in mybooks')
       }
     }
-    fetchedBooksToRead(); 
+    fetchedBooksRead(); 
+
   },[])
 
-  console.log('to-read', toRead )
-  
+  console.log('booksReads state', booksRead)
 
+ 
   return (
 		<div>
 			 <Box
         display="flex"
         alignItems="center"
-        justifyContent="center"
+        justifyContent="left"
         gap={2}
         sx={{
           marginTop: 10,
           marginBottom: 4,
+          
         }}
       >
 
@@ -65,20 +66,20 @@ function WantToRead() {
     marginLeft: 15, 
   }}
 >
-      Books To Read
+      Books Read
     </Typography>
 			<Box
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
-          justifyContent: 'left',
+          justifyContent: 'center',
           gap: 2,
           padding: 2,
           marginLeft: 15, 
         }}
       >
         
-        {toRead.map((book) => (
+        {booksRead.map((book) => (
           <Card key={1} sx={{ width: '300px', height: '450px', cursor: 'pointer' }}>
 						<CardMedia
               component="img"
@@ -99,4 +100,4 @@ function WantToRead() {
 	)
 }
 
-export default WantToRead;
+export default ReadBooks;

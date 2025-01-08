@@ -71,7 +71,7 @@ function MenuAppBar() {
                 textDecoration: 'none',
               }}
             >
-              Bettereads
+              BetterReads
             </Typography>
 
 						<Button
@@ -88,13 +88,13 @@ function MenuAppBar() {
               >
                 Catalogue
               </Button>
-							<Button
+							{/* <Button
                 color="inherit"
                 onClick={() => handleNavigation('/my-books')}
                 sx={{ textTransform: 'none' }}
               >
                 My Books
-              </Button>
+              </Button> */}
 
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>				
               <Tooltip title='Open settings'>
