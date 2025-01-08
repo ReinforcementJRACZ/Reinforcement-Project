@@ -10,6 +10,9 @@ userController.read = (req, res, next) => {
   const queryText = `
   SELECT 
     b.title AS book_title, 
+    b.author AS book_author, 
+    b.genre AS book_genre,
+    b.thumbnail AS image,
     br.rating
   FROM books_read br
   JOIN books b ON br.book_id = b.id
@@ -33,7 +36,10 @@ userController.toRead = (req, res, next) => {
   const { userid } = req.params;
   const queryText = `
   SELECT 
-    b.title AS book_title
+    b.title AS book_title,
+     b.author AS book_author, 
+    b.genre AS book_genre,
+    b.thumbnail AS image
   FROM want_to_read br
   JOIN books b ON br.book_id = b.id
   WHERE br.user_id =$1;  

@@ -5,28 +5,27 @@ import LoginPage from "./assets/pages/LoginPage";
 import SignupPage from "./assets/pages/SignupPage";
 import Catalog from "./assets/components/Catalog";
 import MyBooks from "./assets/components/MyBooks";
+import MenuAppBar from './assets/components/AppBar';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-// Used to track auth state
-// function App() {
-//   const [isAuthenticated, setIsAuthenticated] = useState(false);
+import theme from './theme'
+function App() {
 
-//// Static value for now for debugging purposes
-// function App() {
-//   const isAuthenticated = false; 
-
-  const App = () => {
-    return (
-      <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
-        <Router>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/catalog" element={<Catalog />} />
-            <Route path="/mybooks" element={<MyBooks />} />
-          </Routes>
-        </Router>
-      </GoogleOAuthProvider>
-    );
-  };
+  return (
+		<Router>
+      <MenuAppBar />
+      <Routes>
+        <Route path="/" element={<MyBooks />}/>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/my-books" element={<MyBooks />} />
+        <Route path="/catalogue" element={<Catalog />} />
+        {/* <Route path="/my-books" element={<MyBooks />} /> */}
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+      </Routes>
+    </Router>
+  )
+}
   
   export default App;
