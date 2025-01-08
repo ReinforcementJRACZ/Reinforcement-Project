@@ -29,6 +29,7 @@ export const getAllGoogleBooks = async () => {
             author: book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown',
             genre: book.volumeInfo.categories ? book.volumeInfo.categories.join(', ') : 'Unknown', 
             description: book.volumeInfo.description || 'No description available', 
+            thumbnail: book.volumeInfo.imageLinks?.thumbnail || 'No Image',
 
         })); 
         console.log(books);

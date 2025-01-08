@@ -7,10 +7,10 @@ export const populateBooksService = async () => {
         const books = await getAllGoogleBooks();
 
         const bookInsertPromises = books.map((book) => {
-            const {title, author, genre, description} = book; 
+            const {title, author, genre, description, thumbnail} = book; 
             
-            const insertQuery = 'INSERT INTO books (title, author, genre, description) VALUES ($1, $2, $3, $4)';
-            const values = [title, author, genre, description];
+            const insertQuery = 'INSERT INTO books (title, author, genre, description, thumbnail) VALUES ($1, $2, $3, $4, $5)';
+            const values = [title, author, genre, description, thumbnail];
 
             return query.query(insertQuery, values);
         })
