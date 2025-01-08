@@ -9,7 +9,6 @@ booksController.getBooks = async (req, res, next) => {
       SELECT *
       FROM books
     `
-
     const books = await db.query(getBooksQuery); 
     req.books = books.rows;
     return next();
@@ -36,8 +35,11 @@ booksController.populateBooksTable = async (req, res, next) => {
   }
 };
 
+booksController.getDetails = (req, res, next) => {
+  return next();
+}
 
-
+// middleware to add books to TBR or read
 booksController.add = (req, res, next) => {
   const { userId, bookId, list } = req.body;
   // userId is user ID, bookId is book that user wants to add, and list is either want to read or already read (‘want_to_read’ OR ‘books_read’)
