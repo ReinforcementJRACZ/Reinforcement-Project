@@ -68,3 +68,17 @@ const theme = createTheme({
 });
 
 export default theme;
+
+// import { createTheme } from '@mui/material/styles';
+
+// const theme = createTheme({
+//   typography: {
+//     fontSize: 14, // Set a default font size
+//     button: {
+//       textTransform: 'none', // Prevent capitalization of button text
+//       fontSize: '1rem', // Ensure fontSize is explicitly set
+//     },
+//   },
+// });
+
+// export default theme;
