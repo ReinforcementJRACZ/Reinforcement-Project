@@ -59,7 +59,7 @@ function Catalog() {
 			const fetchData = async () => {
 					try {
 						console.log("entered useEffect fn")
-							const response = await fetch(`http://localhost:3333/api/books`)
+							const response = await fetch(`/api/books`)
 
 							console.log("response: ", response)
 
@@ -83,7 +83,7 @@ function Catalog() {
 			
 			//call fetchdata function 
 			fetchData();
-	}, [books])
+	}, [])
 
 	
 	// const allBooks = await fetch('http://localhost:3333/api/books', {

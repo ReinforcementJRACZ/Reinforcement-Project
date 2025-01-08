@@ -3,11 +3,13 @@ import { getUser, getBooks } from './services/hardcoverBooksService.js';
 import { getAllGoogleBooks } from './services/googleBooksService.js';
 import { connect } from './models/models.js';
 import router from './routers/router.js'
+import cors from 'cors';
 import path from 'path';
 
 const app = express();
 const PORT = 3333;
 
+app.use(cors());
 app.use (express.json());
 
 connect();
