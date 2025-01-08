@@ -8,53 +8,57 @@ booksController.getBooks = async (req, res, next) => {
     const getBooksQuery = `
       SELECT *
       FROM books
-    `
-    const books = await db.query(getBooksQuery); 
+    `;
+    const books = await db.query(getBooksQuery);
     req.books = books.rows;
     return next();
   } catch (error) {
-    return next ({
-      log: 'booksController: Error while getting books from the database' + error,
+    return next({
+      log:
+        'booksController: Error while getting books from the database' + error,
       status: 500,
-      message: { err: 'Failed to get books from database'},
-    })
+      message: { err: 'Failed to get books from database' },
+    });
   }
-}
+};
 
-// middleware for populating the database 
+// middleware for populating the database
 booksController.populateBooksTable = async (req, res, next) => {
   try {
     await populateBooksService();
     return next();
   } catch (error) {
-    return next ({
+    return next({
       log: 'booksController: Error while populating books table:' + error,
       status: 500,
       message: { err: 'Failed to populate books in the database' },
-    })
+    });
   }
 };
 
 booksController.getDetails = (req, res, next) => {
   return next();
-}
+};
 
 // middleware to add books to TBR or read
 booksController.add = (req, res, next) => {
   const { userId, bookId, list } = req.body;
   // userId is user ID, bookId is book that user wants to add, and list is either want to read or already read (‘want_to_read’ OR ‘books_read’)
 
-  const bookQuery = `
-  SELECT *
-  FROM books
-  WHERE id = $1;  
-`;
+  const insertQuery = `
+    INSERT INTO ${list} (user_id, book_id)
+    VALUES ($1, $2)
+    RETURNING *;
+  `;
 
-  db.query(bookQuery, [userId, bookId, list], (err, result) => {
+  db.query(insertQuery, [userId, bookId], (err, result) => {
     if (err) {
-      console.error('Error executing query', err); // Use console.error for errors
-      return next(err); // Pass error to next middleware
+      console.error('Error executing query', err);
+      return next(err);
     }
+    console.log(`Added to list ${list}: `, result.rows[0]);
+
+    return next();
   });
 
   return next();
