@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import MenuAppBar from './assets/components/AppBar';
+import Catalog from './assets/components/Catalog';
+import MyBooks from './assets/components/MyBooks';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <>
-			<MenuAppBar />
-    </>
+    // <>
+		// 	<MenuAppBar />
+		// 	<Catalog />
+    // </>
+		<Router>
+      <MenuAppBar />
+      <Routes>
+        <Route path="/" element={<h1>Home Page</h1>} />
+        <Route path="/catalogue" element={<Catalog />} />
+        <Route path="/my-books" element={<MyBooks />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+      </Routes>
+    </Router>
   )
 }
 
