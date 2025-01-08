@@ -1,14 +1,36 @@
-//Main container for My Books pageimport React from 'react';
-import React from 'react';
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
-function MyBooks() {
+const MyBooks = () => {
+  const location = useLocation();
+  const username = location.state?.username || "Guest";
+
   return (
-    <div>
-      <h1>My Books</h1>
-      <p>Here are the books you have saved in Bettereads.</p>
-      {/* Add logic to display user's books here */}
-    </div>
+    <Box
+      sx={{
+        textAlign: "center",
+        p: 4,
+        backgroundColor: "#f9f5f2",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Typography variant="h3" sx={{ color: "#6a1b9a", mb: 2 }}>
+        Welcome, {username}!
+      </Typography>
+      <Typography variant="subtitle1" sx={{ mb: 4 }}>
+        Here’s your personal library.
+      </Typography>
+
+      {/* Replace this with the actual content of the user's library */}
+      
+      <Typography>Your books will appear here soon!</Typography>
+    </Box>
   );
-}
+};
 
 export default MyBooks;
