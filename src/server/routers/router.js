@@ -12,4 +12,9 @@ router.get('/books', booksController.getBooks, (req, res) => {
   res.status(200).json(req.books);
 })
 
+router.delete('/books', booksController.deleteAllBooks, (req, res) => {
+  res.status(200).json({message: 'All books deleted successfully'});
+});
+
+
 export default router;
