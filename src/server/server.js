@@ -2,15 +2,19 @@ import express from 'express';
 import { getUser, getBooks } from './services/hardcoverBooksService.js';
 import { getAllGoogleBooks } from './services/googleBooksService.js';
 import { connect } from './models/models.js';
-import { router } from './routers/router.js'
-import path from 'path';
+import router from './routers/router.js'
+import cors from 'cors';
 
 const app = express();
 const PORT = 3333;
 
+app.use(cors());
+app.use (express.json());
+
 connect();
 
-app.use (express.json());
+//Router
+app.use('/', router)
 
 app.use('/api', router);
 
@@ -50,7 +54,7 @@ app.get('/me', async (req, res) => {
 
 // 404 router
 app.use('/', (req, res) => {
-  return res.status(404).send('Page not found')
+  return res.status(404).send('Page not found for Reinforceme')
 })
 
 // global error handler
