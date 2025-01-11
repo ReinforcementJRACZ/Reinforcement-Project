@@ -4,11 +4,11 @@ import LoginPage from "./assets/pages/LoginPage";
 import SignupPage from "./assets/pages/SignupPage";
 import Catalog from "./assets/components/Catalog";
 import MyBooks from "./assets/components/MyBooks";
-import React, { useState } from 'react';
 import MenuAppBar from './assets/components/AppBar';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme'
+import Box from '@mui/material/Box';
 
 function App() {
   return (
